@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barbershop</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h1>BARBERSHOP</h1>
+            <br>
+            <form>
+                <div class="form-row">
+                    <div class="col">
+                        <input name="search" class="form-control" type="search" value="{{ search }}" placeholder="Поиск">
+                    </div>
+                </div>
+            </form>
+            <br>
+            <div class="card-columns mt-2">
+                {% for barber in barbers %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="" alt="Image">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            {{ barber.name }}
+                        </h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Уровень: {{ barber.level }}</li>
+                        <li class="list-group-item">Стоимость: {{ barber.price }} руб</li>
+                    </ul>
+                    <div class="card-footer">
+                        <a href="{{ url_for('registration', barber_id=barber.id) }}" class="btn btn-info btn-sm btn-block">Записаться</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
