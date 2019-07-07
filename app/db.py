@@ -10,7 +10,7 @@ def open_db(db_url):
 def get_barbers(db_url):
     with open_db(db_url) as db:
         barbers = db.cursor().execute(
-            'SELECT t_barbers.id, t_barbers.name, t_barbers.level, t_service.price, count(t_clients.id) as clients FROM t_barbers, t_service, t_clients WHERE t_barbers.level = t_service.level and t_barbers.id = t_clients.barber_id'
+            'SELECT t_barbers.id, t_barbers.name, t_barbers.level, t_service.price FROM t_barbers, t_service WHERE t_barbers.level = t_service.level'
         ).fetchall()
         return barbers
 
@@ -39,7 +39,7 @@ def search(db_url, search):
     search += '%'
     with open_db(db_url) as db:
         result = db.cursor().execute(
-            'SELECT t_barbers.id, t_barbers.name, t_barbers.level, t_service.price, count(t_clients.id) as clients FROM t_barbers, t_service, t_clients WHERE t_barbers.level = t_service.level AND (t_barbers.name LIKE :search OR t_barbers.level LIKE :search) and t_clients.barber_id = t_barbers.id', {'search': search}
+            'SELECT t_barbers.id, t_barbers.name, t_barbers.level, t_service.price FROM t_barbers, t_service WHERE t_barbers.level = t_service.level AND (t_barbers.name LIKE :search OR t_barbers.level LIKE :search)', {'search': search}
         ).fetchall()
         return result
 
@@ -47,7 +47,7 @@ def search(db_url, search):
 def search_by_id(db_url, barber_id):
     with open_db(db_url) as db:
         result = db.cursor().execute(
-            'SELECT t_barbers.id, t_barbers.name, t_barbers.level, t_barbers.img_path, t_service.price, count(t_clients.id) as clients FROM t_barbers, t_service, t_clients WHERE t_barbers.id = :barber_id and t_service.level = t_barbers.level and t_clients.barber_id = t_barbers.id', {'barber_id': barber_id}
+            'SELECT t_barbers.id, t_barbers.name, t_barbers.level, t_barbers.img_path, t_service.price FROM t_barbers, t_service WHERE t_barbers.id = :barber_id and t_service.level = t_barbers.level', {'barber_id': barber_id}
         ).fetchone()
         return result
 
