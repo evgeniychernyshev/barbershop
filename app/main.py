@@ -1,14 +1,14 @@
 import os
 import uuid
 import waitress
-from flask import Flask, render_template, request, url_for, make_response
+from flask import Flask, render_template, request, url_for
 from werkzeug.utils import redirect
 from app import db
 
 
 def start():
     app = Flask(__name__)
-    app.config['IMAGE_DIR'] = os.path.join('static')
+    app.config['IMAGE_DIR'] = os.path.join('app/static')
     DATABASE_URL = 'app/db.sqlite'
 
     @app.route('/')
