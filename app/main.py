@@ -9,7 +9,7 @@ from app import db
 def start():
     app = Flask(__name__)
     app.config['IMAGE_DIR'] = os.path.join('static')
-    DATABASE_URL = 'db.sqlite'
+    DATABASE_URL = 'app/db.sqlite'
 
     @app.route('/')
     def index():
