@@ -2,6 +2,7 @@ CREATE TABLE t_barbers (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   level TEXT NOT NULL,
+  is_working INTEGER NOT NULL,
   img_path TEXT
 );
 
@@ -23,6 +24,8 @@ CREATE TABLE t_clients (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     phone TEXT NOT NULL,
+    time_id INTEGER NOT NULL,
     barber_id TEXT NOT NULL,
+    FOREIGN KEY (time_id) REFERENCES t_timetable(id),
     FOREIGN KEY (barber_id) REFERENCES t_barbers(id)
 );

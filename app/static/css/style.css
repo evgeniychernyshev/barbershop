@@ -1,0 +1,6 @@
+.input__button {
+    display: flex;
+}
+.input__button .form-control {
+    margin-right: 5px;
+}

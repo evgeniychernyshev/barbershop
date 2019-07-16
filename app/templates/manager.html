@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Barbershop</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 <div class="container">
@@ -12,31 +13,36 @@
             <br>
             <h1>BARBERSHOP</h1>
             <br>
-            <form>
-                <div class="form-row">
-                    <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="input__button">
                         <input name="search" class="form-control" type="search" value="{{ search }}" placeholder="Поиск">
+                        <button class="btn btn-outline-primary" type="submit">Поиск</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary mt-2">Новый сотрудник</button>
-            </form>
+            </div>
+            <a href="{{ url_for('barber_edit', barber_id='new') }}" class="btn btn-primary mt-4">Новый сотрудник</a>
             <br>
-            <div class="card-columns mt-2">
+            <div class="card-columns mt-4">
                 {% for barber in barbers %}
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="" alt="Image">
+                    <img class="card-img-top" src="{{ barber.img_path }}" alt="Image">
                     <div class="card-body">
                         <h3 class="card-title">
                             {{ barber.name }}
                         </h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Уровень: {{ barber.level }}</li>
-                        <li class="list-group-item">Клиенты: {{ barber.clients }} чел</li>
+                        <li class="list-group-item">Уровень мастерства: {{ barber.level }}</li>
+                        <li class="list-group-item">Клиентов на завтра: {{ barber.clients }} чел</li>
+                        {% if barber.is_working == 1 %}
+                        <li class="list-group-item">Статус сотрудника: работает</li>
+                        {% else %}
+                        <li class="list-group-item">Статус сотрудника: уволен</li>
+                        {% endif %}
                     </ul>
                     <div class="card-footer">
-                        <a href="" class="btn btn-primary btn-sm btn-block">Редактировать</a>
-                        <a href="" class="btn btn-danger btn-sm btn-block">Удалить</a>
+                        <a href="{{ url_for('barber_edit', barber_id=barber.id) }}" class="btn btn-primary btn-sm btn-block">Редактировать</a>
                     </div>
                 </div>
                 {% endfor %}

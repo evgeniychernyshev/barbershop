@@ -19,18 +19,24 @@
                     <p>Стоимость стрижки: {{ barber.price }} руб</p>
                     <p>Уровень: {{ barber.level }}</p>
                     <p>
-                        <label for="TimeInput">Выберите время посещения:</label>
-                        <select class="form-control" id="TimeInput">
+                        <label for="TimeInput">Выберите время посещения (запись доступна только на завтра):</label>
+                        <select class="form-control" id="TimeInput" name="time">
                             {% for time in times %}
                             <option>{{ time }}</option>
                             {% endfor %}
                         </select>
-                        <br>
-                        <button class="btn btn-primary">Записаться</button>
-                        <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Назад</a>
+                    </p>
+                    <p>
+                        <label for="ClientName">Введите ваше имя:</label>
+                        <input type="text" id="ClientName" class="form-control" name="name" required>
+                    </p>
+                    <p>
+                        <label for="ClientPhone">Введите ваш номер телефона:</label>
+                        <input type="text" id="ClientPhone" class="form-control" name="phone" required>
                     </p>
                 </div>
-
+                <button class="btn btn-info">Записаться</button>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-info">Назад</a>
             </form>
         </div>
     </div>
